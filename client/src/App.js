@@ -1,7 +1,8 @@
 import "./App.css";
 import Topbar from "./Components/Topbar/Topbar";
 import WritePage from "./Pages/WritePage";
-import "draft-js/dist/Draft.css";
+import Login from "./Pages/Login";
+import Signup from "./Pages/Signup";
 
 //for testing
 import Posts from "./Components/Posts/Posts";
@@ -11,7 +12,9 @@ function App() {
     <div className="App">
       <Topbar />
       {/* <HomePage /> */}
-      <WritePage />
+      {/* <WritePage /> */}
+      {/* <Login /> */}
+      <Signup />
     </div>
   );
 }

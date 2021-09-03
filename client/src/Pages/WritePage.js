@@ -69,7 +69,7 @@ export default function WritePage() {
         </button>
       </form>
 
-      <div>{story !== null ? <ArticleBody rawDraftjsDoc={story} /> : ""}</div>
+      {/* <div>{story !== null ? <ArticleBody rawDraftjsDoc={story} /> : ""}</div> */}
     </div>
   );
 }
