@@ -3,6 +3,7 @@ import Topbar from "./Components/Topbar/Topbar";
 import WritePage from "./Pages/WritePage";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
+import BlogPageFull from "./Pages/BlogPageFull";
 
 //for testing
 import Posts from "./Components/Posts/Posts";
@@ -14,7 +15,8 @@ function App() {
       {/* <HomePage /> */}
       {/* <WritePage /> */}
       {/* <Login /> */}
-      <Signup />
+      {/* <Signup /> */}
+      <BlogPageFull />
     </div>
   );
 }
