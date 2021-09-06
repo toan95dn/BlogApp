@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import authRoutes from "./routes/Auth.mjs";
+import authRoutes from "./routes/auth.mjs";
 import morgan from "morgan";
 
 const app = express();
