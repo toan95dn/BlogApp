@@ -1,23 +1,16 @@
 import express from "express";
 import passport from "passport";
 import User from "../models/User.mjs";
-import bcrypt from "bcrypt";
 
 const authRoutes = express.Router();
 
 //Sign up
 authRoutes.post("/signup", async (req, res) => {
-  const salt = await bcrypt.genSalt();
-  const hashedPassword = await bcrypt.hash(req.body.password, salt);
   try {
-    const newUser = new User({
+    const user = new User({
       email: req.body.email,
-      password: hashedPassword,
     });
-
-    console.log(req.body.email);
-    const user = await newUser.save();
-
+    const newUser = await User.register(user, req.body.password);
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json(error);
@@ -25,23 +18,24 @@ authRoutes.post("/signup", async (req, res) => {
 });
 
 //Sign in
-authRoutes.post("/signin", async (req, res) => {
-  try {
-    const user = await User.findOne({ email: req.body.email });
+authRoutes.post(
+  "/signin",
+  passport.authenticate("local", {
+    successRedirect: "/suc",
+    failureRedirect: "/error",
+    passReqToCallback: true,
+  }),
+  (req, res) => {
+    console.log(req.user);
+    res.send("Hello success");
+  }
+);
 
-    !user && res.status(400).json("Wrong credential");
-
-    console.log(user);
-
-    const validate = await bcrypt.compare(req.body.password, user.password);
-
-    !validate && res.status(400).json("Wrong credential");
-
-    res.status(200).json("Log in success!");
-  } catch (error) {}
+//Sign out
+authRoutes.get("/signout", (req, res) => {
+  console.log("hi");
+  req.logout();
+  res.send("out");
 });
-
-//Update
-authRoutes.put("/:id", async (req, res) => {});
 
 export default authRoutes;
