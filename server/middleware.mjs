@@ -1,9 +1,8 @@
-import { userSchema } from "./schemas";
-import ExpressError from "./utils/ExpressError";
-
+import { userSchema } from "./schemas.mjs";
+import ExpressError from "./utils/ExpressError.mjs";
 const validateSignup = (req, res, next) => {
   try {
-    await userSchema.validate(req.body, { abortEarly: false }); //Success
+    userSchema.validate(req.body, { abortEarly: false }); //Success
   } catch (err) {
     console.log(err.errors);
     const message = err.errors.join("-");

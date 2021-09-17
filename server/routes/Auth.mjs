@@ -1,6 +1,7 @@
 import express from "express";
 import passport from "passport";
 import User from "../models/User.mjs";
+import { validateSignup } from "../middleware.mjs";
 
 const authRoutes = express.Router();
 
