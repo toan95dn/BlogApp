@@ -6,6 +6,7 @@ const authRoutes = express.Router();
 
 //Sign up
 authRoutes.post("/signup", async (req, res) => {
+  //Change to validate/then post
   try {
     const user = new User({
       email: req.body.email,
@@ -13,7 +14,8 @@ authRoutes.post("/signup", async (req, res) => {
     const newUser = await User.register(user, req.body.password);
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).json(error);
+    // next(error);
+    res.status(500).json({ message: "Wrong as fuck" });
   }
 });
 
