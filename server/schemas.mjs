@@ -9,9 +9,7 @@ let userSchema = yup.object().shape({
   confirmedPassword: yup
     .string()
     .required()
-    .test("password-match", "Password must match", (value) => {
-      return true;
-    }),
+    .oneOf([yup.ref("password"), null], "Passwords must match"),
 });
 
 export { userSchema };
