@@ -6,11 +6,11 @@ let userSchema = yup.object().shape({
     .string()
     .required()
     .min(6, "Password must have at least 6 characters"),
-  password_confirmed: yup
+  confirmedPassword: yup
     .string()
     .required()
     .test("password-match", "Password must match", (value) => {
-      return value === this.parent.password;
+      return true;
     }),
 });
 

@@ -1,3 +1,5 @@
 export default function catchAsync(func) {
-  return func(req, res, next).catch(next);
+  return (req, res, next) => {
+    func(req, res, next).catch(next);
+  };
 }

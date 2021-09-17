@@ -7,15 +7,16 @@ import axios from "axios";
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirm_password, set_confirmedPassword] = useState("");
+  const [confirmedPassword, set_confirmedPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("New ver: ", email, password);
+    console.log("New ver: ", email, password, confirmedPassword);
     try {
       const res = await axios.post("server/auth/signup", {
         email,
         password,
+        confirmedPassword,
       });
       console.log(res);
 
@@ -86,13 +87,16 @@ export default function Signup() {
                 Password
               </label>
               <input
-                id="passwordConfirmed"
-                name="passwordConfirmed"
+                id="password_confirmed"
+                name="password_confirmed"
                 type="password"
                 autoComplete="current-password"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Confirm Password"
+                onChange={(e) => {
+                  set_confirmedPassword(e.target.value);
+                }}
               />
             </div>
           </div>

@@ -2,23 +2,13 @@ import express from "express";
 import passport from "passport";
 import User from "../models/User.mjs";
 import { validateSignup } from "../middleware.mjs";
+import createUser from "../controllers/createUser.mjs";
+import catchAsync from "../utils/catchAsync.mjs";
 
 const authRoutes = express.Router();
 
 //Sign up
-authRoutes.post("/signup", async (req, res) => {
-  //Change to validate/then post
-  try {
-    const user = new User({
-      email: req.body.email,
-    });
-    const newUser = await User.register(user, req.body.password);
-    res.status(200).json(user);
-  } catch (error) {
-    // next(error);
-    res.status(500).json({ message: "Wrong as fuck" });
-  }
-});
+authRoutes.post("/signup", validateSignup, catchAsync(createUser));
 
 //Sign in
 authRoutes.post(
