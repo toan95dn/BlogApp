@@ -26,7 +26,7 @@ export default function Signup() {
     } catch (err) {
       setError(true);
       setErrorMessage(err.response.data.message);
-      console.log("Err", err.response.data.message);
+      console.log("Err is: ", err.response.data.message);
     }
   };
 
