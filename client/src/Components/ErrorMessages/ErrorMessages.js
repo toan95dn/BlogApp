@@ -1,5 +1,4 @@
 export default function ErrorMessages({ messages }) {
-  console.log("THIS", messages);
   const arrayOfErrorMessages = messages.split("-");
 
   const listOfErrorMEssages = arrayOfErrorMessages.map((message) => (
