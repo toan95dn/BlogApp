@@ -22,12 +22,6 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-//Error handling
-app.use(function (err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send("Something broke!");
-});
-
 mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
@@ -58,4 +52,11 @@ app.use("/suc", (req, res) => {
 app.use("/", (req, res) => {
   console.log("hey, this is the main url");
   res.send("Hello world");
+});
+
+//Error handling
+app.use(function (err, req, res, next) {
+  console.log("HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
 });
