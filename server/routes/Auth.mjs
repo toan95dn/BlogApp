@@ -14,7 +14,7 @@ authRoutes.post("/signup", validateSignup, catchAsync(createUser));
 authRoutes.post(
   "/signin",
   passport.authenticate("local", {
-    successRedirect: "/suc",
+    successRedirect: "/",
     failureRedirect: "/error",
     passReqToCallback: true,
   }),

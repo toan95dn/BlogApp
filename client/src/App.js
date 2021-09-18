@@ -5,19 +5,32 @@ import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import BlogPageFull from "./Pages/BlogPageFull";
 
-//for testing
+//React router
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+//For testing, remember to delete!!!!!!!!
 import Posts from "./Components/Posts/Posts";
 import HomePage from "./Pages/HomePage";
+
 function App() {
   return (
-    <div className="App">
-      <Topbar />
-      {/* <HomePage /> */}
-      {/* <WritePage /> */}
-      {/* <Login /> */}
-      <Signup />
-      {/* <BlogPageFull /> */}
-    </div>
+    <Router>
+      <div className="App">
+        <Topbar />
+        {/* <HomePage /> */}
+        {/* <WritePage /> */}
+        {/* <BlogPageFull /> */}
+        <Switch>
+          <Route path="/signin">
+            <Login />
+          </Route>
+
+          <Route path="/signup">
+            <Signup />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

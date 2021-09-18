@@ -34,10 +34,10 @@ mongoose
   .catch((err) => console.log(err));
 
 //User auth
-app.use("/server/auth", authRoutes);
+app.use("/auth", authRoutes);
 
 //Blog post
-app.use("/server/posts", BlogRoutes);
+app.use("/posts", BlogRoutes);
 
 //Testing
 
