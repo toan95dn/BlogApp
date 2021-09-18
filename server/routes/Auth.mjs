@@ -8,7 +8,7 @@ import catchAsync from "../utils/catchAsync.mjs";
 const authRoutes = express.Router();
 
 //Sign up
-authRoutes.post("/signup", catchAsync(validateSignup), catchAsync(createUser));
+authRoutes.post("/signup", validateSignup, catchAsync(createUser));
 
 //Sign in
 authRoutes.post(

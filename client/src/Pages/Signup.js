@@ -3,11 +3,14 @@ import { ImBlog } from "react-icons/im";
 import { useState } from "react";
 import Message from "../Components/Message/Message";
 import axios from "axios";
+import ErrorMessages from "../Components/ErrorMessages/ErrorMessages";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmedPassword, set_confirmedPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [errorExist, setError] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,11 +21,12 @@ export default function Signup() {
         password,
         confirmedPassword,
       });
-      console.log(res);
 
-      // console.log(res.message);
+      console.log(res);
     } catch (err) {
-      console.log(err.response.data.message);
+      setError(true);
+      setErrorMessage(err.response.data.message);
+      console.log("Err", err.response.data.message);
     }
   };
 
@@ -116,6 +120,13 @@ export default function Signup() {
             </button>
           </div>
         </form>
+
+        {errorExist ? (
+          // <div className="bg-red-300 p-1 text-red-900">{errorMessage}</div>
+          <ErrorMessages messages={errorMessage} />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

@@ -57,6 +57,6 @@ app.use("/", (req, res) => {
 //Error handling
 app.use(function (err, req, res, next) {
   console.log("HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
-  console.error(err.stack);
-  res.status(500).send("Something broke!");
+  console.error(err.message);
+  res.status(err.statusCode).json({ message: err.message });
 });
