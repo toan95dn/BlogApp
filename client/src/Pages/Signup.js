@@ -16,7 +16,7 @@ export default function Signup() {
     e.preventDefault();
     console.log("New ver: ", email, password, confirmedPassword);
     try {
-      const res = await axios.post("server/auth/signup", {
+      const res = await axios.post("auth/signup", {
         email,
         password,
         confirmedPassword,

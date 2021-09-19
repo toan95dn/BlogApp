@@ -60,5 +60,6 @@ app.use(function (err, req, res, next) {
   console.error("Message from backend: ", err.message);
   res
     .status(err.statusCode ? err.statusCode : 500)
-    .json({ message: err.message });
+    .json({ message: err.message })
+    .redirect("/aaas");
 });
