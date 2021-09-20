@@ -1,9 +1,10 @@
 import { userSchema } from "./schemas.mjs";
 import ExpressError from "./utils/ExpressError.mjs";
+import passport from "passport";
 
-const validateSignup = async (req, res, next) => {
+const validateSignup = (req, res, next) => {
   try {
-    await userSchema.validateSync(req.body, { abortEarly: false }); //Success
+    userSchema.validateSync(req.body, { abortEarly: false }); //Success
     next();
   } catch (err) {
     const message = err.errors.join("-");
@@ -11,4 +12,10 @@ const validateSignup = async (req, res, next) => {
   }
 };
 
-export { validateSignup };
+const validateSignin = passport.authenticate("local", {
+  successRedirect: "/",
+  failureRedirect: "/login",
+  failureFlash: false,
+});
+
+export { validateSignup, validateSignin };

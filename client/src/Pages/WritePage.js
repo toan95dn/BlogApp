@@ -29,13 +29,20 @@ export default function WritePage() {
 
   useEffect(() => {
     if (story) {
-      // console.log(story);
+      console.log(story);
     }
   });
 
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+
   return (
     <div className="flex justify-center w-full p-14 md:px-4 md:text-sm">
-      <form className=" bg-white flex flex-col items-center gap-2 w-5/6 md:w-screen">
+      <form
+        className=" bg-white flex flex-col items-center gap-2 w-5/6 md:w-screen"
+        onSubmit={handleSubmit}
+      >
         <div className="w-full text-xl text-indigo-600 font-bold text-left md:text-base">
           Title:
         </div>
@@ -64,7 +71,10 @@ export default function WritePage() {
           <MyEditor setStory={setStory} />
         </div>
 
-        <button className="mt-2 py-2 px-6 text-white bg-indigo-500 inline-block rounded hover:bg-indigo-400 focus:ring focus:ring-offset-2 focus:ring-indigo-500 self-start">
+        <button
+          type="submit"
+          className="mt-2 py-2 px-6 text-white bg-indigo-500 inline-block rounded hover:bg-indigo-400 focus:ring focus:ring-offset-2 focus:ring-indigo-500 self-start"
+        >
           Publish
         </button>
       </form>

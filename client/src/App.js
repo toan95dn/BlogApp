@@ -28,6 +28,10 @@ function App() {
           <Route path="/signup">
             <Signup />
           </Route>
+
+          <Route path="/write">
+            <WritePage />
+          </Route>
         </Switch>
       </div>
     </Router>

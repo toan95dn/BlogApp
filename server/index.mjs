@@ -42,10 +42,29 @@ app.use("/posts", BlogRoutes);
 //Testing
 
 app.use("/error", (req, res) => {
+  console.log("ERRRRRRRRR");
   res.send("error");
 });
 
+//Login error / success
+
+app.use("/errorlogin", (req, res) => {
+  res.status(500).json({ message: "Invalid email or password." });
+});
+
+app.use("/suclogin", (req, res) => {
+  console.log("SUCCCCCCC");
+
+  res.send("suc");
+});
+
+//Posting a blog
+
+//
+
 app.use("/suc", (req, res) => {
+  console.log("SUCCCCCCC");
+
   res.send("suc");
 });
 
@@ -60,6 +79,5 @@ app.use(function (err, req, res, next) {
   console.error("Message from backend: ", err.message);
   res
     .status(err.statusCode ? err.statusCode : 500)
-    .json({ message: err.message })
-    .redirect("/aaas");
+    .json({ message: err.message });
 });

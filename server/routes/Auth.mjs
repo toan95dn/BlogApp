@@ -1,7 +1,7 @@
 import express from "express";
 import passport from "passport";
 import User from "../models/User.mjs";
-import { validateSignup } from "../middleware.mjs";
+import { validateSignup, validateSignin } from "../middleware.mjs";
 import createUser from "../controllers/createUser.mjs";
 import catchAsync from "../utils/catchAsync.mjs";
 
@@ -14,14 +14,9 @@ authRoutes.post("/signup", validateSignup, catchAsync(createUser));
 authRoutes.post(
   "/signin",
   passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/error",
-    passReqToCallback: true,
-  }),
-  (req, res) => {
-    console.log(req.user);
-    res.send("Hello success");
-  }
+    failureRedirect: "/errorlogin",
+    successRedirect: "/suclogin",
+  })
 );
 
 //Sign out
