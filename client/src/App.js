@@ -12,6 +12,9 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Posts from "./Components/Posts/Posts";
 import HomePage from "./Pages/HomePage";
 
+//Context
+import { isLoginContext } from "./Context/LoginContext";
+
 function App() {
   return (
     <Router>
@@ -21,6 +24,10 @@ function App() {
         {/* <WritePage /> */}
         {/* <BlogPageFull /> */}
         <Switch>
+          <Route path="/home">
+            <HomePage />
+          </Route>
+
           <Route path="/signin">
             <Login />
           </Route>
