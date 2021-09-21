@@ -1,6 +1,8 @@
 import { Menu, Transition } from "@headlessui/react";
 import MenuItem from "./MenuItem";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
+import authContext from "../../Context/AuthContext";
+import axios from "axios";
 
 import {
   IoPencilOutline,
@@ -10,6 +12,17 @@ import {
 } from "react-icons/io5";
 
 export default function MenuDropdown({ profilePicture }) {
+  const { isAuthenticated, setAuthenticated } = useContext(authContext);
+
+  const handleLogout = async () => {
+    try {
+      await axios.post("auth/singout");
+      setAuthenticated(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Menu as="div">
       <Menu.Button as="div">{profilePicture}</Menu.Button>
@@ -30,7 +43,9 @@ export default function MenuDropdown({ profilePicture }) {
           <MenuItem icon={<IoPersonCircleOutline />} optionName="Profile" />
           <MenuItem icon={<IoPencilOutline />} optionName="Write" />
           <MenuItem icon={<IoLibraryOutline />} optionName="Your stories" />
-          <MenuItem icon={<IoLogOutOutline />} optionName="Sign out" />
+          <div onClick={handleLogout}>
+            <MenuItem icon={<IoLogOutOutline />} optionName="Sign out" />
+          </div>
         </Menu.Items>
       </Transition>
     </Menu>

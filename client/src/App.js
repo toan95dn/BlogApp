@@ -6,7 +6,13 @@ import Signup from "./Pages/Signup";
 import BlogPageFull from "./Pages/BlogPageFull";
 
 //React router
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
 
 //For testing, remember to delete!!!!!!!!
 import Posts from "./Components/Posts/Posts";
@@ -31,7 +37,7 @@ function App() {
             </Route>
 
             <Route path="/signin">
-              <Login />
+              {isAuthenticated ? <Redirect to="/home" /> : <Login />}
             </Route>
 
             <Route path="/signup">

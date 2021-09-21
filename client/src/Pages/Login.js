@@ -4,16 +4,16 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import ErrorMessages from "../Components/ErrorMessages/ErrorMessages";
 import authContext from "../Context/AuthContext";
+import { Redirect } from "react-router";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [errorExist, setError] = useState(false);
-  const [isLogin, setLogin] = useState(false);
 
   //context auth
-  const { setAuthenticated } = useContext(authContext);
+  const { isAuthenticated, setAuthenticated } = useContext(authContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
