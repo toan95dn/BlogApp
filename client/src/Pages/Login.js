@@ -1,14 +1,19 @@
 import { LockClosedIcon } from "@heroicons/react/solid";
 import { ImBlog } from "react-icons/im";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import ErrorMessages from "../Components/ErrorMessages/ErrorMessages";
+import authContext from "../Context/AuthContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [errorExist, setError] = useState(false);
+  const [isLogin, setLogin] = useState(false);
+
+  //context auth
+  const { setAuthenticated } = useContext(authContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,6 +25,7 @@ export default function Login() {
       });
 
       console.log(res);
+      setAuthenticated(true);
     } catch (err) {
       setError(true);
       setErrorMessage(err.response.data.message);

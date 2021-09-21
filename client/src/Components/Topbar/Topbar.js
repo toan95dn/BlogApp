@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import { ImBlog, ImSearch } from "react-icons/im";
 import MenuDropdown from "./MenuDropdown";
 import { Link } from "react-router-dom";
-import { isLoginContext } from "../../Context/LoginContext";
+
+import authContext from "../../Context/AuthContext";
 
 import testImg from "../Images/Me.jpg";
 const myIcon = new Image();
@@ -16,6 +17,8 @@ export default function Topbar() {
       className="w-9 object-center rounded-full cursor-pointer"
     />
   );
+
+  const { isAuthenticated } = useContext(authContext);
 
   return (
     <div className="w-full h-12 bg-indigo-200 grid grid-cols-3 content-center fixed top-0 left-0 z-50">
@@ -40,31 +43,31 @@ export default function Topbar() {
         </form>
 
         <div className="flex justify-end gap-3 text-lg pr-3 sm:text-base sm:pr-1">
-          <Link to="/signin">
-            <div className="cursor-pointer p-1">Sign in</div>
-          </Link>
+          {!isAuthenticated ? (
+            <Link to="/signin">
+              <div className="cursor-pointer p-1">Sign in</div>
+            </Link>
+          ) : (
+            ""
+          )}
 
-          <Link to="/signup">
-            <div className="cursor-pointer font-semibold text-white p-1 pl-3 pr-3  rounded-lg bg-indigo-500">
-              Sign up
+          {!isAuthenticated ? (
+            <Link to="/signup">
+              <div className="cursor-pointer font-semibold text-white p-1 pl-3 pr-3  rounded-lg bg-indigo-500">
+                Sign up
+              </div>
+            </Link>
+          ) : (
+            ""
+          )}
+
+          {isAuthenticated ? (
+            <div>
+              <MenuDropdown profilePicture={avatar} />
             </div>
-          </Link>
-
-          <isLoginContext.Consumer>
-            {(value) =>
-              value ? (
-                <div>
-                  <MenuDropdown profilePicture={avatar} />
-                </div>
-              ) : (
-                ""
-              )
-            }
-          </isLoginContext.Consumer>
-
-          {/* <div>
-            <MenuDropdown profilePicture={avatar} />
-          </div> */}
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

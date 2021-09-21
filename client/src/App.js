@@ -13,35 +13,38 @@ import Posts from "./Components/Posts/Posts";
 import HomePage from "./Pages/HomePage";
 
 //Context
-import { isLoginContext } from "./Context/LoginContext";
+import authContext from "./Context/AuthContext";
+import { useState } from "react";
 
 function App() {
+  const [isAuthenticated, setAuthenticated] = useState(false);
+
   return (
-    <Router>
-      <div className="App">
-        <Topbar />
-        {/* <HomePage /> */}
-        {/* <WritePage /> */}
-        {/* <BlogPageFull /> */}
-        <Switch>
-          <Route path="/home">
-            <HomePage />
-          </Route>
+    <authContext.Provider value={{ isAuthenticated, setAuthenticated }}>
+      <Router>
+        <div className="App">
+          <Topbar />
 
-          <Route path="/signin">
-            <Login />
-          </Route>
+          <Switch>
+            <Route path="/home">
+              <HomePage />
+            </Route>
 
-          <Route path="/signup">
-            <Signup />
-          </Route>
+            <Route path="/signin">
+              <Login />
+            </Route>
 
-          <Route path="/write">
-            <WritePage />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+            <Route path="/signup">
+              <Signup />
+            </Route>
+
+            <Route path="/write">
+              <WritePage />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </authContext.Provider>
   );
 }
 
