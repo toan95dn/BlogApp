@@ -2,6 +2,7 @@ import { Menu, Transition } from "@headlessui/react";
 import MenuItem from "./MenuItem";
 import { Fragment, useContext } from "react";
 import authContext from "../../Context/AuthContext";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import {
@@ -16,6 +17,7 @@ export default function MenuDropdown({ profilePicture }) {
 
   const handleLogout = async () => {
     try {
+      await axios.post("auth/islogin");
       await axios.post("auth/singout");
       setAuthenticated(false);
     } catch (err) {

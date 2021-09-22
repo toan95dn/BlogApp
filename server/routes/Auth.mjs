@@ -21,9 +21,20 @@ authRoutes.post(
 
 //Sign out
 authRoutes.get("/signout", (req, res) => {
-  console.log("hi");
   req.logout();
   res.send("out");
+});
+
+authRoutes.get("/islogin", (req, res) => {
+  // if (req.user) {
+  //   console.log(req.user);
+  //   res.send(req.user);
+  // } else {
+  //   res.send("Null");
+  // }
+  console.log(req.user);
+  console.log(req.isAuthenticated());
+  res.send(req.isAuthenticated());
 });
 
 export default authRoutes;

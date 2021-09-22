@@ -14,8 +14,15 @@ const validateSignup = (req, res, next) => {
 
 const validateSignin = passport.authenticate("local", {
   successRedirect: "/",
-  failureRedirect: "/login",
+  failureRedirect: "/errorlogin",
   failureFlash: false,
 });
 
-export { validateSignup, validateSignin };
+const isLoggedin = (req, res, next) => {
+  if (!req.isAuthenticated()) {
+    throw new ExpressError("Please log in first", 500);
+  }
+  next();
+};
+
+export { validateSignup, validateSignin, isLoggedin };

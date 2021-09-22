@@ -8,6 +8,7 @@ import LocalStrategy from "passport-local";
 import User from "./models/User.mjs";
 import BlogPost from "./models/BlogPost.mjs";
 import BlogRoutes from "./routes/posts.mjs";
+import session from "express-session";
 
 const app = express();
 app.use(express.json());
@@ -16,8 +17,13 @@ app.use(morgan("dev"));
 
 dotenv.config();
 
+app.use(
+  session({ secret: "not a good one", resave: true, saveUninitialized: true })
+);
 //Passport config
 app.use(passport.initialize());
+app.use(passport.session());
+
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -53,8 +59,9 @@ app.use("/errorlogin", (req, res) => {
 });
 
 app.use("/suclogin", (req, res) => {
+  console.log(req.isAuthenticated());
   console.log("SUCCCCCCC");
-
+  console.log(req.user);
   res.send("suc");
 });
 
