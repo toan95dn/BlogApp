@@ -6,6 +6,7 @@ import { Editor } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import ArticleBody from "../Components/ArticleBody/ArticleBody";
 import { convertFromHTML } from "draft-js";
+import axios from "axios";
 
 export default function WritePage() {
   const allTopics = [
@@ -25,6 +26,8 @@ export default function WritePage() {
   allTopics.sort();
 
   const [selectedTopic, setSelectTopic] = useState(allTopics[0]);
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
   const [story, setStory] = useState(null);
 
   useEffect(() => {
@@ -35,6 +38,15 @@ export default function WritePage() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    try {
+      axios.post("/posts/write", {
+        body: story,
+        title: title,
+        author: "Test author",
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
@@ -51,6 +63,9 @@ export default function WritePage() {
           className="h-10 bg-indigo-100 rounded-lg p-3 focus:outline-none w-full shadow-sm mb-4"
           name="title"
           placeholder="Enter the title"
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
         />
 
         <div className="text-xl text-indigo-600 font-bold text-left w-full md:text-base">

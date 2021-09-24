@@ -45,7 +45,7 @@ function App() {
             </Route>
 
             <Route path="/write">
-              <WritePage />
+              {isAuthenticated ? <WritePage /> : <Redirect to="/signin" />}
             </Route>
           </Switch>
         </div>

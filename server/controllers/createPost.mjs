@@ -1,7 +1,7 @@
 import BlogPost from "../models/BlogPost.mjs";
 
 export default async function createBlogPost(req, res) {
-  console.log("AAAAA");
+  console.log(req.body.body);
   try {
     const newBlogPost = new BlogPost({
       title: req.body.title,

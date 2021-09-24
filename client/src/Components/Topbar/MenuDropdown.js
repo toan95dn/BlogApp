@@ -43,7 +43,9 @@ export default function MenuDropdown({ profilePicture }) {
           divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
         >
           <MenuItem icon={<IoPersonCircleOutline />} optionName="Profile" />
-          <MenuItem icon={<IoPencilOutline />} optionName="Write" />
+          <Link to="/write">
+            <MenuItem icon={<IoPencilOutline />} optionName="Write" />
+          </Link>
           <MenuItem icon={<IoLibraryOutline />} optionName="Your stories" />
           <div onClick={handleLogout}>
             <MenuItem icon={<IoLogOutOutline />} optionName="Sign out" />
