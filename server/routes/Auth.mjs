@@ -21,6 +21,8 @@ authRoutes.post(
 
 //Sign out
 authRoutes.get("/signout", (req, res) => {
+  console.log("logging out ...");
+  console.log(req.user._id);
   req.logout();
   res.send("out");
 });
@@ -32,7 +34,7 @@ authRoutes.get("/islogin", (req, res) => {
   // } else {
   //   res.send("Null");
   // }
-  console.log(req.user);
+  console.log("CHeck is login");
   console.log(req.isAuthenticated());
   res.send(req.isAuthenticated());
 });

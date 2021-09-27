@@ -21,8 +21,6 @@ export default function Signup() {
         password,
         confirmedPassword,
       });
-
-      console.log(res);
     } catch (err) {
       setError(true);
       setErrorMessage(err.response.data.message);

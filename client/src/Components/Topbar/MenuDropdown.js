@@ -17,8 +17,8 @@ export default function MenuDropdown({ profilePicture }) {
 
   const handleLogout = async () => {
     try {
-      await axios.post("auth/islogin");
-      await axios.post("auth/singout");
+      await axios.get("auth/islogin");
+      await axios.post("auth/signout");
       setAuthenticated(false);
     } catch (err) {
       console.log(err);

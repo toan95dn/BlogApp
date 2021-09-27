@@ -43,6 +43,7 @@ export default function WritePage() {
         body: story,
         title: title,
         author: "Test author",
+        topic: selectedTopic,
       });
     } catch (err) {
       console.log(err);
