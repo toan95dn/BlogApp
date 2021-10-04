@@ -12,4 +12,11 @@ let userSchema = yup.object().shape({
     .oneOf([yup.ref("password"), null], "Passwords must match"),
 });
 
-export { userSchema };
+let blogpostSchema = yup.object().shape({
+  title: yup
+    .string()
+    .required("Title is required")
+    .min(5, "Title must have more than 5 characters"),
+});
+
+export { userSchema, blogpostSchema };

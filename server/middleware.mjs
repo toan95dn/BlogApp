@@ -1,6 +1,7 @@
 import { userSchema } from "./schemas.mjs";
 import ExpressError from "./utils/ExpressError.mjs";
 import passport from "passport";
+import { blogpostSchema } from "./schemas.mjs";
 
 const validateSignup = (req, res, next) => {
   try {
@@ -25,4 +26,13 @@ const isLoggedin = (req, res, next) => {
   next();
 };
 
-export { validateSignup, validateSignin, isLoggedin };
+const validatePost = (req, res, next) => {
+  try {
+    blogpostSchema.validateSync(req.body, { abortEarly: false });
+  } catch (err) {
+    const message = err.errors.join("-");
+    next(new ExpressError(message, 500));
+  }
+};
+
+export { validateSignup, validateSignin, isLoggedin, validatePost };

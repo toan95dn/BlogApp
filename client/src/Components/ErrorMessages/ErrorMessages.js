@@ -6,7 +6,7 @@ export default function ErrorMessages({ messages }) {
   ));
 
   return (
-    <ul className="bg-red-300 py-2 px-2 text-red-900 text-left rounded-md">
+    <ul className="bg-red-300 py-2 px-2 text-red-900 text-left rounded-md w-full">
       {listOfErrorMEssages}
     </ul>
   );

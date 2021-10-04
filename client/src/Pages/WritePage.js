@@ -7,6 +7,7 @@ import draftToHtml from "draftjs-to-html";
 import ArticleBody from "../Components/ArticleBody/ArticleBody";
 import { convertFromHTML } from "draft-js";
 import axios from "axios";
+import ErrorMessages from "../Components/ErrorMessages/ErrorMessages";
 
 export default function WritePage() {
   const allTopics = [
@@ -29,6 +30,8 @@ export default function WritePage() {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [story, setStory] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [errorExist, setError] = useState(false);
 
   useEffect(() => {
     if (story) {
@@ -36,19 +39,21 @@ export default function WritePage() {
     }
   });
 
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      axios.post("/posts/write", {
+      await axios.post("/posts/write", {
         body: story,
         title: title,
         author: "Test author",
         topic: selectedTopic,
       });
     } catch (err) {
-      console.log(err);
+      setError(true);
+      setErrorMessage(err.response.data.message);
+      console.log("Err is: ", err.response.data.message);
     }
-  }
+  };
 
   return (
     <div className="flex justify-center w-full p-14 md:px-4 md:text-sm">
@@ -86,6 +91,8 @@ export default function WritePage() {
         <div className=" w-full h-screen flex justify-center ">
           <MyEditor setStory={setStory} />
         </div>
+
+        {errorExist ? <ErrorMessages messages={errorMessage} /> : ""}
 
         <button
           type="submit"

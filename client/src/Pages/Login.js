@@ -139,12 +139,7 @@ export default function Login() {
           </div>
         </form>
 
-        {errorExist ? (
-          // <div className="bg-red-300 p-1 text-red-900">{errorMessage}</div>
-          <ErrorMessages messages={errorMessage} />
-        ) : (
-          ""
-        )}
+        {errorExist ? <ErrorMessages messages={errorMessage} /> : ""}
       </div>
     </div>
   );
